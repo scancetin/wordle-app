@@ -40,24 +40,27 @@ class WordleWidget extends StatelessWidget {
   }
 
   Consumer letterBox(int wordIndex, int letterIndex) {
-    return Consumer<WordModel>(builder: (context, model, child) {
-      double _boxSize = MediaQuery.of(context).size.width * 0.18;
-      String _letter = model.fillBoxes(wordIndex, letterIndex);
-      return SizedBox(
-        width: _boxSize,
-        height: _boxSize,
-        child: Card(
-          margin: EdgeInsets.all(5),
-          color: model.boxColor(_letter, wordIndex, letterIndex),
-          shadowColor: Colors.black,
-          child: Center(
-            child: Text(
-              _letter,
-              style: TextStyle(fontSize: 45, fontWeight: FontWeight.bold),
+    return Consumer<WordModel>(
+      builder: (context, model, child) {
+        double _boxSize = MediaQuery.of(context).size.width * 0.16;
+        String _letter = model.fillBoxes(wordIndex, letterIndex);
+        Color _color = model.boxColor(_letter, wordIndex, letterIndex);
+        return SizedBox(
+          width: _boxSize,
+          height: _boxSize,
+          child: Card(
+            margin: EdgeInsets.all(5),
+            color: _color,
+            shadowColor: Colors.black,
+            child: Center(
+              child: Text(
+                _letter,
+                style: TextStyle(fontSize: 45, fontWeight: FontWeight.bold, color: _color == Colors.white ? Colors.black : Colors.white),
+              ),
             ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 }

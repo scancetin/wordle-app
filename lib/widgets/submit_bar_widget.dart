@@ -10,29 +10,18 @@ class SubmitBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<WordModel>(
       builder: (context, model, child) {
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            leftButton(model, context),
-            submitButton(model, context),
-            rigthButton(model, context),
-          ],
+        return Container(
+          color: Colors.white,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              leftButton(model, context),
+              submitButton(model, context),
+              rigthButton(model, context),
+            ],
+          ),
         );
       },
-    );
-  }
-
-  IconButton rigthButton(WordModel model, BuildContext context) {
-    return IconButton(
-      onPressed: () {
-        if (model.totalLetter < 5 && model.totalWord < 6) {
-          // klavye eklenecek
-          Provider.of<WordModel>(context, listen: false).addLetter("W");
-        }
-      },
-      icon: Icon(Icons.add_circle_outline_rounded),
-      iconSize: 50,
-      color: Colors.green,
     );
   }
 
@@ -58,11 +47,20 @@ class SubmitBarWidget extends StatelessWidget {
   IconButton leftButton(WordModel model, BuildContext context) {
     return IconButton(
       onPressed: () {
-        if (model.totalLetter > 0 && model.totalWord < 6) {
-          Provider.of<WordModel>(context, listen: false).deleteLetter();
-        }
+        //lock button
       },
       icon: Icon(Icons.lock),
+      iconSize: 50,
+      color: Colors.green,
+    );
+  }
+
+  IconButton rigthButton(WordModel model, BuildContext context) {
+    return IconButton(
+      onPressed: () {
+        //hint button
+      },
+      icon: Icon(Icons.add_circle_outline_rounded),
       iconSize: 50,
       color: Colors.green,
     );

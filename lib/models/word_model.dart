@@ -47,9 +47,9 @@ class WordModel extends ChangeNotifier {
       if (correctWord[letterIndex] == letter) {
         return Colors.green;
       } else if (correctWord.contains(letter)) {
-        return Colors.yellow;
+        return Colors.orange;
       }
-      return Colors.grey;
+      return Colors.blueGrey;
     }
     return Colors.white;
   }
