@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 
 class WordModel extends ChangeNotifier {
@@ -15,6 +17,9 @@ class WordModel extends ChangeNotifier {
   void addWord(Word newWord) {
     _letterList.clear();
     _wordList.add(newWord);
+    if (newWord.word == correctWord) {
+      print("correct guess");
+    }
     notifyListeners();
   }
 
