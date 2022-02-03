@@ -79,6 +79,7 @@ class KeyboardWidget extends StatelessWidget {
       flex: 2,
       child: Consumer<WordModel>(
         builder: (context, model, child) {
+          Color? _color = model.keyColors.containsKey(key) ? model.keyColors[key] : Colors.white;
           return Padding(
             padding: EdgeInsets.all(2),
             child: ElevatedButton(
@@ -89,13 +90,13 @@ class KeyboardWidget extends StatelessWidget {
                 }
               },
               style: ElevatedButton.styleFrom(
-                primary: Colors.white,
+                primary: _color,
                 minimumSize: Size(double.infinity, double.infinity),
               ),
               child: Text(
                 key,
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: _color == Colors.white ? Colors.black : Colors.white),
               ),
             ),
           );

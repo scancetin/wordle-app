@@ -6,17 +6,19 @@ class WordModel extends ChangeNotifier {
   final List<Word> _wordList = [];
   final List<String> _letterList = [];
   final String _correctWord = "WORDL";
+  final Map<String, Color> _keyColors = {};
 
   List<Word> get wordList => _wordList;
   List<String> get letterList => _letterList;
   String get correctWord => _correctWord;
+  Map<String, Color> get keyColors => _keyColors;
 
   int get totalWord => _wordList.length;
   int get totalLetter => _letterList.length;
 
   void addWord(Word newWord) {
-    _letterList.clear();
-    _wordList.add(newWord);
+    letterList.clear();
+    wordList.add(newWord);
     if (newWord.word == correctWord) {
       print("correct guess");
     }
@@ -24,13 +26,27 @@ class WordModel extends ChangeNotifier {
   }
 
   void addLetter(String newLetter) {
-    _letterList.add(newLetter);
+    letterList.add(newLetter);
     notifyListeners();
   }
 
   void deleteLetter() {
-    _letterList.removeAt(totalLetter - 1);
+    letterList.removeLast();
     notifyListeners();
+  }
+
+  void keyboardColor(String key, Color color) {
+    if (keyColors.containsKey(key)) {
+      if (color == Colors.green) {
+        keyColors[key] = Colors.green;
+      } else if (color == Colors.orange && keyColors[key] != Colors.green) {
+        keyColors[key] = Colors.orange;
+      } else if (color == Colors.blueGrey) {
+        keyColors[key] = Colors.blueGrey;
+      }
+    } else {
+      keyColors[key] = color;
+    }
   }
 
   String fillBoxes(int wordIndex, int letterIndex) {
@@ -43,11 +59,6 @@ class WordModel extends ChangeNotifier {
   }
 
   Color boxColor(String letter, int wordIndex, int letterIndex) {
-    // green 459525
-    // yellow C8A111
-    // white FFFFFF
-    // grey 474B4D
-
     if (totalWord > wordIndex) {
       if (correctWord[letterIndex] == letter) {
         return Colors.green;

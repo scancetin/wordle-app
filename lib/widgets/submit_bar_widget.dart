@@ -30,6 +30,7 @@ class SubmitBarWidget extends StatelessWidget {
       onPressed: () {
         if (model.totalLetter == 5 && model.totalWord < 6) {
           // kelime için veritabanı kontrolü yapılacak
+          // kazanma veya kaybetme durumu için kontrol yapılacak
           Provider.of<WordModel>(context, listen: false).addWord(Word(model.letterList.join()));
         }
       },

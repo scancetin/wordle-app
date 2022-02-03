@@ -45,6 +45,8 @@ class WordleWidget extends StatelessWidget {
         double _boxSize = MediaQuery.of(context).size.width * 0.16;
         String _letter = model.fillBoxes(wordIndex, letterIndex);
         Color _color = model.boxColor(_letter, wordIndex, letterIndex);
+        Provider.of<WordModel>(context, listen: false).keyboardColor(_letter, _color);
+
         return SizedBox(
           width: _boxSize,
           height: _boxSize,
